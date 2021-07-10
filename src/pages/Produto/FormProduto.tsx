@@ -34,12 +34,8 @@ export function FormProduto() {
 
   const [date, setDate] = useState("2021-08-22");
 
-  function handleSubmit() {
-    console.log(Date.parse(date));
-
-    console.log(date);
-
-    api.post("/produto", {
+  async function handleSubmit() {
+    await api.post("/produto", {
       nome: name1,
       categoria: name2,
       qtdCaixa: name3,
