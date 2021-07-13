@@ -7,6 +7,7 @@ import { FormCredentials } from "../pages/Produtor/FormCredentials";
 import { FormPersonalData } from "../pages/Produtor/FormPersonalData";
 import { FormProduto } from "../pages/Produto/FormProduto";
 import { ListProduto } from "../pages/Produto/ListProduto";
+import { FormFuncionarioCecafes } from '../pages/FuncionarioCecafes/FormFuncionarioCecafes';
 
 const stackRoutes = createStackNavigator();
 
@@ -24,6 +25,7 @@ const appRoutes: React.FC = () => (
     <stackRoutes.Screen name="FormPersonalData" component={FormPersonalData} />
     <stackRoutes.Screen name="FormProduto" component={FormProduto} />
     <stackRoutes.Screen name="ListProduto" component={ListProduto} />
+    <stackRoutes.Screen name="FormFuncionarioCecafes" component={FormFuncionarioCecafes} />
   </stackRoutes.Navigator>
 );
 

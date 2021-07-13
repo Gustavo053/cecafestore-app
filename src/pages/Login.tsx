@@ -28,7 +28,7 @@ export function Login() {
     const [name2, setName2] = useState<string>();
 
     function handleRegister() {
-        navigation.navigate('FormCredentials');
+        navigation.navigate('FormFuncionarioCecafes');
     }
 
     function handleFocus1() {
@@ -58,7 +58,7 @@ export function Login() {
     }
 
     async function handleSubmit() {
-        const response = await api.get('/produtor');
+        const response = await api.get('/produto');
 
         console.log(response.data);
     }

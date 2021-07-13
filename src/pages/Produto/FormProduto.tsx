@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from "react";
 import {
   SafeAreaView,
@@ -41,6 +41,8 @@ export function FormProduto() {
       qtdCaixa: name3,
       dataValidade: Date.parse(date),
     });
+
+    navigation.navigate('ListProduto');
   }
 
   function handleFocus1() {
