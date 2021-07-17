@@ -11,9 +11,13 @@ import {
     Text
 } from 'react-native';
 
+import { MaskedTextInput } from 'react-native-mask-text'
 import { Button } from '../../components/Button';
+import { useNavigation } from "@react-navigation/native";
 
-export function FormPersonalData() {
+export function FormPersonalProdutor({ route }: any) {
+    const navigation = useNavigation();
+
     const [isFocus1, setIsFocus1] = useState(false);
     const [isFilled1, setIsFilled1] = useState(false);
     const [name1, setName1] = useState<string>();
@@ -25,6 +29,16 @@ export function FormPersonalData() {
     const [isFocus3, setIsFocus3] = useState(false);
     const [isFilled3, setIsFilled3] = useState(false);
     const [name3, setName3] = useState<string>();
+
+    function handleNextStep() {
+        navigation.navigate('FormAdressProdutor', {
+            login: route.params?.login,
+            senha: route.params?.senha,
+            nome: name1,
+            contato: name2,
+            cpf: name3
+        });
+    }
 
     function handleFocus1() {
         setIsFocus1(true);
@@ -70,7 +84,7 @@ export function FormPersonalData() {
             <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View>
-                        <Text style={styles.title}>Cadastro de produtor</Text>
+                        <Text style={styles.title}>Dados do produtor</Text>
                         <TextInput
                             style={[styles.input, (isFocus1 || isFilled1) && { borderColor: '#5cd65c' }]}
                             placeholder="Nome completo"
@@ -79,26 +93,32 @@ export function FormPersonalData() {
                             onChangeText={handleInputChange1}
                         >
                         </TextInput>
-                        <TextInput
-                            secureTextEntry
-                            style={[styles.input, (isFocus2 || isFilled2) && { borderColor: '#5cd65c' }]}
+                        <MaskedTextInput
+                            style={[
+                                styles.input,
+                                (isFocus2 || isFilled2) && { borderColor: "#5cd65c" },
+                            ]}
                             placeholder="Insira o contato"
                             onFocus={handleFocus2}
                             onBlur={handleBlur2}
                             onChangeText={handleInputChange2}
-                        >
-                        </TextInput>
-                        <TextInput
-                            secureTextEntry
-                            style={[styles.input, (isFocus3 || isFilled3) && { borderColor: '#5cd65c' }]}
-                            placeholder="Insira o CPF"
+                            mask={"(99) 9 9999-9999"}
+                            keyboardType="numeric"
+                        ></MaskedTextInput>
+                        <MaskedTextInput
+                            style={[
+                                styles.input,
+                                (isFocus3 || isFilled3) && { borderColor: "#5cd65c" },
+                            ]}
+                            placeholder="CPF"
                             onFocus={handleFocus3}
                             onBlur={handleBlur3}
                             onChangeText={handleInputChange3}
-                        >
-                        </TextInput>
+                            mask={"999.999.999-99"}
+                            keyboardType="numeric"
+                        ></MaskedTextInput>
                         <View style={{ alignItems: 'center', justifyContent: 'space-around' }}>
-                            <Button title="Finalizar" activeOpacity={0.7} />
+                            <Button title="Próximo passo" activeOpacity={0.7} onPress={handleNextStep} />
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
@@ -132,7 +152,7 @@ const styles = StyleSheet.create({
         padding: 10,
         borderBottomWidth: 1,
         width: '100%',
-        textAlign: 'center'
+        textAlign: 'left'
     },
 
     link: {

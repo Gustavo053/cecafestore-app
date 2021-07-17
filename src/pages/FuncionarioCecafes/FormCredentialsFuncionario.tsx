@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/native';
 import React, { useState } from "react";
 import {
     SafeAreaView,
@@ -6,19 +5,16 @@ import {
     Keyboard,
     Platform,
     TouchableWithoutFeedback,
-    TouchableOpacity,
     StyleSheet,
     View,
     TextInput,
     Text,
 } from "react-native";
 
-import { MaskedTextInput } from 'react-native-mask-text';
-
 import { Button } from "../../components/Button";
-import api from "../../api/api";
+import { useNavigation } from "@react-navigation/native";
 
-export function FormFuncionarioCecafes() {
+export function FormCredentialsFuncionario() {
     const navigation = useNavigation();
 
     const [isFocus1, setIsFocus1] = useState(false);
@@ -36,14 +32,10 @@ export function FormFuncionarioCecafes() {
     const [date, setDate] = useState("2021-08-22");
 
     async function handleSubmit() {
-        await api.post("/produto", {
-            nome: name1,
-            categoria: name2,
-            qtdCaixa: name3,
-            dataValidade: Date.parse(date),
+        navigation.navigate('FormPersonalFuncionario', {
+            login: name1,
+            senha: name2
         });
-
-        navigation.navigate('ListProduto');
     }
 
     function handleFocus1() {
@@ -99,13 +91,13 @@ export function FormFuncionarioCecafes() {
             >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View>
-                        <Text style={styles.title}>Cadastro do funcionário</Text>
+                        <Text style={styles.title}>Credenciais do funcionário</Text>
                         <TextInput
                             style={[
                                 styles.input,
                                 (isFocus1 || isFilled1) && { borderColor: "#5cd65c" },
                             ]}
-                            placeholder="Nome completo"
+                            placeholder="Informe seu login"
                             onFocus={handleFocus1}
                             onBlur={handleBlur1}
                             onChangeText={handleInputChange1}
@@ -115,28 +107,28 @@ export function FormFuncionarioCecafes() {
                                 styles.input,
                                 (isFocus2 || isFilled2) && { borderColor: "#5cd65c" },
                             ]}
-                            placeholder="Nova matricula"
-                            onFocus={handleFocus2}
-                            onBlur={handleBlur2}
+                            secureTextEntry
+                            placeholder="Insira sua senha"
+                            onFocus={handleFocus3}
+                            onBlur={handleBlur3}
                             onChangeText={handleInputChange2}
                         ></TextInput>
-                        <MaskedTextInput
+                        <TextInput
                             style={[
                                 styles.input,
                                 (isFocus3 || isFilled3) && { borderColor: "#5cd65c" },
                             ]}
-                            placeholder="CPF"
+                            secureTextEntry
+                            placeholder="Insira sua senha novamente"
                             onFocus={handleFocus3}
                             onBlur={handleBlur3}
                             onChangeText={handleInputChange3}
-                            mask={"999.999.999-99"}
-                            keyboardType="numeric"
-                        ></MaskedTextInput>
+                        ></TextInput>
                         <View
                             style={{ alignItems: "center", justifyContent: "space-around" }}
                         >
                             <Button
-                                title="Cadastrar"
+                                title="Próximo"
                                 activeOpacity={0.7}
                                 onPress={handleSubmit}
                             />
@@ -173,7 +165,7 @@ const styles = StyleSheet.create({
         padding: 10,
         borderBottomWidth: 1,
         width: "100%",
-        textAlign: "center",
+        textAlign: "left",
     },
 
     link: {

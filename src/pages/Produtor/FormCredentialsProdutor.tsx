@@ -15,7 +15,7 @@ import {
 
 import { Button } from '../../components/Button';
 
-export function FormCredentials() {
+export function FormCredentialsProdutor() {
     const navigation = useNavigation();
 
     const [isFocus1, setIsFocus1] = useState(false);
@@ -31,7 +31,10 @@ export function FormCredentials() {
     const [name3, setName3] = useState<string>();
 
     function handleNextStep() {
-        navigation.navigate('FormPersonalData');
+        navigation.navigate('FormPersonalProdutor', {
+            login: name1,
+            senha: name2
+        });
     }
 
     function handleFocus1() {
@@ -78,7 +81,7 @@ export function FormCredentials() {
             <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View>
-                        <Text style={styles.title}>Cadastro de produtor</Text>
+                        <Text style={styles.title}>Credenciais do produtor</Text>
                         <TextInput
                             style={[styles.input, (isFocus1 || isFilled1) && { borderColor: '#5cd65c' }]}
                             placeholder="Insira o login"
@@ -140,7 +143,7 @@ const styles = StyleSheet.create({
         padding: 10,
         borderBottomWidth: 1,
         width: '100%',
-        textAlign: 'center'
+        textAlign: 'left'
     },
 
     link: {

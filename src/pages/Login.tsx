@@ -28,7 +28,7 @@ export function Login() {
     const [name2, setName2] = useState<string>();
 
     function handleRegister() {
-        navigation.navigate('FormFuncionarioCecafes');
+        navigation.navigate('FormCredentialsFuncionario');
     }
 
     function handleFocus1() {
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
         padding: 10,
         borderBottomWidth: 1,
         width: '100%',
-        textAlign: 'center'
+        textAlign: 'left'
     },
 
     link: {
