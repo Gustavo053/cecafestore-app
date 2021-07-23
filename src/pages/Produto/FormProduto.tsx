@@ -52,13 +52,7 @@ export function FormProduto() {
 	const [unidadeMedida, setUnidadeMedida] = useState<string>('quilo');
 
 	async function handleSubmit() {
-		console.log('nome:', name1);
-		console.log('categoria:', categoria);
-		console.log('quantidade:', name3);
-		console.log('unidadeMedida:', unidadeMedida);
-		console.log('preco:', name4.split('$')[1]);
-
-		if (name1Error == '' && name3Error == '' && name4Error == '' && categoria != '' && unidadeMedida != '') {
+		if (name1Error == '' && name3Error == '' && categoria != '' && unidadeMedida != '') {
 			setSubmitError('');
 			await api
 				.post('/produto', {
@@ -203,8 +197,6 @@ export function FormProduto() {
 											selectedValue={unidadeMedida}
 											onValueChange={(itemValue, itemIndex) => {
 												setUnidadeMedida(itemValue);
-												console.log('i-', itemValue);
-												console.log(unidadeMedida);
 											}}
 										>
 											<Picker.Item label='Quilo' value='quilo' />
